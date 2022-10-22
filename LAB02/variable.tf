@@ -31,3 +31,10 @@ variable "dbsrv_name" {
   type = string
 }
 
+variable "client_secret" {
+  type = string
+}
+
+variable "service_endpoint_id" {
+  type = string
+}
