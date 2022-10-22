@@ -1,0 +1,8 @@
+strg_name          = "tfstorageactdemo10"
+strgContainer_name = "tfstoragecontainer"
+kv_name            = "tfkvdemo-1000022"
+environment        = "development"
+location           = "eastus"
+rg_name            = "TfDemo01"
+db_name            = "tfdemodb006"
+dbsrv_name         = "tfdemodbsrv006"
