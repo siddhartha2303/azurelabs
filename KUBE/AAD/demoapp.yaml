@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demowebapp
+    aadpodidbinding: keyvaultsampleidentity
+  name: demowebapp
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demowebapp
+  template:
+    metadata:
+      labels:
+        app: demowebapp
+        aadpodidbinding: keyvaultsampleidentity
+      name: demowebapp
+    spec:
+      containers:
+      - name: demowebapp
+        image: siddhartha2303/azurewebappdemo:v0.8
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        env:
+        - name: AZURE_KEYVAULT_NAME
+          value: demokvaks-1000009
+        - name: AZURE_KEYVAULT_SECRET_NAME
+          value: storageconnectionstring
+        - name: AZURE_KEYVAULT_SECRET_VERSION
+          value: c34bba38aaad47e5a08133a9733a2f5a
+        - name: AZURE_STOARGE_CONTAINER_NAME
+          value: tfcontainer002
+        volumeMounts:
+          - name: appsettings-volume
+            mountPath: /app/appsettings.json
+            subPath: appsettings.json
+      volumes:
+      - name: appsettings-volume
+        configMap:
+            name: appsettings-kubernetes  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demowebapp-services
+spec:
+  selector:
+    app: demowebapp
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

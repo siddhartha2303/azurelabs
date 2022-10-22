@@ -1,0 +1,8 @@
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentity
+metadata:
+  name: keyvaultsampleidentity
+spec:
+  type: 0
+  resourceID: /subscriptions/ed8861e0-0657-467b-bb7d-069bf3f64457/resourceGroups/DEMO001-nrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aksdemo-cluster-agentpool
+  clientID: 52fb8263-026c-4981-aa45-32330b61fb6b
