@@ -70,7 +70,7 @@ resource "azurerm_key_vault_secret" "client-id" {
 
 resource "azurerm_key_vault_secret" "client-secret" {
   name         = "client-secret"
-  value        = "6LI8Q~XFvDdNFpDa4ycJLDhPul2.f~D3VbEPwbd8"
+  value        = var.client_secret
   key_vault_id = azurerm_key_vault.kv1.id
   depends_on = [
     module.create_storage
@@ -148,7 +148,7 @@ resource "azuredevops_variable_group" "azdevops-variable-group" {
 
   key_vault {
     name                = var.kv_name
-    service_endpoint_id = "f05d21b0-f0c0-4744-b940-1bd526199f63"
+    service_endpoint_id = var.service_endpoint_id
   }
 
   variable {
