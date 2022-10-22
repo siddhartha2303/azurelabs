@@ -1,0 +1,39 @@
+{
+	"folders": [
+		{
+			"name": "AZURECODE",
+			"path": "D:/AZURECODE"
+		},
+		{
+			"name": "terraform-course-azure-HoussemDellai",
+			"path": "D:/AZURECODE/Terraform/terraform-course-azure-HoussemDellai"
+		},
+		{
+			"name": "TERRAFORMRG",
+			"path": "../../../TERRAFORMRG"
+		},
+		{
+			"name": "TERRAFORM-APP-DB",
+			"path": "../../../TERRAFORM-APP-DB"
+		},
+		{
+			"name": "TERRAFORM-DB",
+			"path": "../../../TERRAFORM-DB"
+		},
+		{
+			"name": "TERRAFORM-AKS",
+			"path": "../../../TERRAFORM-AKS"
+		},
+		{
+			"name": "flux-demo",
+			"path": "../../../flux-demo"
+		},
+		{
+			"name": "AKS-DEMO",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"powershell.cwd": "d:\\AZURECODE"
+	}
+}

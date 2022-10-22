@@ -1,0 +1,42 @@
+pool:
+  name: Azure Pipelines
+#Your build pipeline references an undefined variable named ‘strgKey1’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘client-id’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘client-secret’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘TenantID’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+steps:
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+  displayName: 'Install Terraform latest'
+- task: InstallSSHKey@0
+  displayName: 'Install an SSH key'
+  inputs:
+    knownHostsEntry: '|1|tHKMfBwFGvAClxQJmqg64tv1YZA=|tUnFq+HFDohb1fdOKGeZrCktOuE= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H'
+    sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyneWLm+dTE1cVROWQyTGbGT2NZlhVkzB46r3a1sFgZStg1FneWUszB4/PIaPVru+2uuMIFGuFij46Qq0Hd4OYpgyVvUAmrda5mPMmw+moJ2K3iMf6p4sGtYaz7BN76qx4QJG1c6f2+ZoVxLtz2jTRQrE3zo0do6ASdYSz+wE838rCCIkXJGgonYyK1qGaQnC5B8hBwwQJTe3aqAXyva3bM4fsXWWTTxTaIXmwaZAar4loVJ8TMYdyr2SU8XwoTbWRS1ninrk5wyUDIfgIOkaF7far54wFlIGPET8yurqQ/8Y85g4KhsmNDttM/VWrtGvFe/u/CMlQSPnDP7kuMk4z'
+    sshKeySecureFile: 'terraform_rsa'
+
+- script: 'terraform init -backend-config="access_key=$(strgKey1)"'
+  workingDirectory: terraform
+  displayName: 'Terraform-Init'
+
+- script: 'terraform validate'
+  workingDirectory: terraform
+  displayName: 'Terraform-Validate'
+
+- script: 'terraform plan -input=false -out=tfplan -var="spn-client-id=$(client-id)" -var="spn-client-secret=$(client-secret)" -var="spn-tenant-id=$(TenantID)" -var="azsubscription-id=$(SubscriptionID)"'
+  workingDirectory: terraform
+  displayName: 'Terraform-Plan'
+
+- task: ArchiveFiles@2
+  displayName: 'Archive-Files'
+  inputs:
+    rootFolderOrFile: terraform
+    archiveType: tar
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-tfplan.tgz'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Pipeline Artifact'
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-tfplan.tgz'
+    artifact: '$(Build.BuildId)-tfplan'
+

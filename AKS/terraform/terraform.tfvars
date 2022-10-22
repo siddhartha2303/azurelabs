@@ -1,0 +1,5 @@
+rg_name     = "DEMO001"
+location    = "eastus"
+environment = "development"
+kv_name     = "demokvaks-1000009"
+strg_name   = "tfstorageactdemo9"
