@@ -11,8 +11,8 @@ steps:
 - task: InstallSSHKey@0
   displayName: 'Install an SSH key'
   inputs:
-    knownHostsEntry: '|1|tHKMfBwFGvAClxQJmqg64tv1YZA=|tUnFq+HFDohb1fdOKGeZrCktOuE= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H'
-    sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyneWLm+dTE1cVROWQyTGbGT2NZlhVkzB46r3a1sFgZStg1FneWUszB4/PIaPVru+2uuMIFGuFij46Qq0Hd4OYpgyVvUAmrda5mPMmw+moJ2K3iMf6p4sGtYaz7BN76qx4QJG1c6f2+ZoVxLtz2jTRQrE3zo0do6ASdYSz+wE838rCCIkXJGgonYyK1qGaQnC5B8hBwwQJTe3aqAXyva3bM4fsXWWTTxTaIXmwaZAar4loVJ8TMYdyr2SU8XwoTbWRS1ninrk5wyUDIfgIOkaF7far54wFlIGPET8yurqQ/8Y85g4KhsmNDttM/VWrtGvFe/u/CMlQSPnDP7kuMk4z'
+    knownHostsEntry: 'your known host entry'
+    sshPublicKey: 'your ssh key'
     sshKeySecureFile: 'terraform_rsa'
 
 - script: 'terraform init -backend-config="access_key=$(strgKey1)"'
