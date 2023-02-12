@@ -1,0 +1,13 @@
+#curl -sL https://istio.io/downloadIstioctl | sh -
+#export PATH=$HOME/.istioctl/bin:$PATH
+#istioctl operator init
+#kubectl create ns istio-system
+#kubectl apply -f istio-operator.yaml
+
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: demo-istiocontrolplane
+spec:
+  profile: default
